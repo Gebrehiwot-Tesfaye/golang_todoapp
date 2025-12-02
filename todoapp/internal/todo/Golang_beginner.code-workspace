@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "Golang_beginner",
+		"path": "../../../../Desktop/Golang_beginner"
+	},
+	{
+		"name": "todoapp",
+		"path": "../.."
+	}
+],
+  "settings": {}
+}

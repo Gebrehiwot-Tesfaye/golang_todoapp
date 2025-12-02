@@ -1,0 +1,248 @@
+definitions:
+  todo.CreateTodoRequest:
+    properties:
+      title:
+        example: Buy groceries
+        type: string
+    type: object
+  todo.Todo:
+    properties:
+      completed:
+        example: false
+        type: boolean
+      completed_at:
+        example: "2023-01-02T15:04:05Z"
+        type: string
+      created_at:
+        example: "2023-01-01T00:00:00Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      title:
+        example: Buy groceries
+        type: string
+    type: object
+  todo.UpdateTodoRequest:
+    properties:
+      completed:
+        example: true
+        type: boolean
+      title:
+        example: Updated title
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /todos:
+    get:
+      parameters:
+      - description: Todo to create
+        in: body
+        name: todo
+        schema:
+          $ref: '#/definitions/todo.CreateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todos
+          schema:
+            items:
+              $ref: '#/definitions/todo.Todo'
+            type: array
+        "201":
+          description: Newly created todo
+          schema:
+            $ref: '#/definitions/todo.Todo'
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List all todos or create a new todo
+      tags:
+      - todos
+    post:
+      parameters:
+      - description: Todo to create
+        in: body
+        name: todo
+        schema:
+          $ref: '#/definitions/todo.CreateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todos
+          schema:
+            items:
+              $ref: '#/definitions/todo.Todo'
+            type: array
+        "201":
+          description: Newly created todo
+          schema:
+            $ref: '#/definitions/todo.Todo'
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List all todos or create a new todo
+      tags:
+      - todos
+  /todos/{id}:
+    delete:
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Todo data to update
+        in: body
+        name: todo
+        schema:
+          $ref: '#/definitions/todo.UpdateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get, update, or delete a todo
+      tags:
+      - todos
+    get:
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Todo data to update
+        in: body
+        name: todo
+        schema:
+          $ref: '#/definitions/todo.UpdateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get, update, or delete a todo
+      tags:
+      - todos
+    put:
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Todo data to update
+        in: body
+        name: todo
+        schema:
+          $ref: '#/definitions/todo.UpdateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get, update, or delete a todo
+      tags:
+      - todos
+  /todos/{id}/toggle:
+    post:
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated todo
+          schema:
+            $ref: '#/definitions/todo.Todo'
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Toggle todo completion status
+      tags:
+      - todos
+swagger: "2.0"
